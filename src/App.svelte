@@ -63,6 +63,15 @@
       })
       .catch(console.log);
   }
+
+  async function removeToDo(id) {
+    fetch("http://localhost:3000/notes/" + id, { method: "DELETE" })
+      .then(res => res.json())
+      .then(data => {
+        fetchTodos();
+      })
+      .catch(console.log);
+  }
 </script>
 
 <svelte:head>
@@ -114,6 +123,13 @@
                 on:click={() => updateToDo(todo.id)}>
                 <span class="icon">
                   <i class="fas fa-check" />
+                </span>
+              </button>
+              <button
+                class="button is-text is-pulled-right is-small"
+                on:click={() => removeToDo(todo.id)}>
+                <span class="icon">
+                  <i class="fas fa-trash" />
                 </span>
               </button>
             </div>
